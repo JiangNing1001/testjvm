@@ -12,7 +12,9 @@ public class ThreadPoolDemo {
         //参数1：线程池中的常驻核心线程数  参数2：线程池中能够容纳同时 执行的最大线程数
         //参数3：多余的空闲线程的存活时间  参数5：队列大小
         ExecutorService executorService = new ThreadPoolExecutor(3,5,60, TimeUnit.SECONDS,
-        new ArrayBlockingQueue<>(10), Executors.defaultThreadFactory(),);
+        new ArrayBlockingQueue<>(10), Executors.defaultThreadFactory(),(Runnable r,ThreadPoolExecutor executor)->{
+            System.out.println("这是我们的自定义拒绝策略");
+        });
         //5个任务
         for (int i = 0; i < 20; i++) {
             int FinalI = i ;
